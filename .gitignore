@@ -1,4 +1,7 @@
 .vs
 .cmake
 CMakeFiles
-out
+out/
+*.exe
+*.o
+*.a
