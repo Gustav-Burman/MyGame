@@ -1,29 +1,25 @@
 ﻿// game.cpp : Defines the entry point for the application.
 //
 
-#include "main.h"
+#include <iostream>
 #include <SDL3/SDL.h>
+#include "windows.h"
 
 int main(int argc, char* argv[]) {
-	// Initialize SDL
+	// Init SDL
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
 		return 1;
 	}
-
 	// Create window
-	SDL_Window* window = SDL_CreateWindow(
-		"My First Game",
-		800, 600,
-		0
-	);
+	SDL_Window* window = initMainWindow();
 
-	if (!window) {
-		std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << "\n";
-		SDL_Quit();
-		return 1;
-	}
 
+
+
+
+
+	// For main loop
 	bool running { true };
 	SDL_Event event;
 
