@@ -9,18 +9,20 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("game")
+project (game)
 
 # Add libraries
-set(SDL3_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3")
+set(SDL3_DIR "${CMAKE_SOURCE_DIR}/libs/SDL3/cmake")
+
+find_package(SDL3 REQUIRED CONFIG)
+
 include_directories(${SDL3_DIR}/include)
 link_directories(${SDL3_DIR}/lib)
 
 # Add source to this project's executable.
 add_executable (game "src/main.cpp" "src/main.h")
-#add_executable (game src/game.cpp)
 
-#target_link_libraries(game SDL3main SDL3)
+target_link_libraries(game PRIVATE SDL3::SDL3)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET game PROPERTY CXX_STANDARD 20)
