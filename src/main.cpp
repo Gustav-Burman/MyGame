@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <SDL3/SDL.h>
-#include "windows.h"
+#include "window_utils.h"
 
 int main(int argc, char* argv[]) {
 	// Init SDL
@@ -11,13 +11,9 @@ int main(int argc, char* argv[]) {
 		std::cerr << "SDL_Init Error: " << SDL_GetError() << "\n";
 		return 1;
 	}
-	// Create window
-	SDL_Window* window = initMainWindow();
 
-
-
-
-
+	SDL_Window* window = Window::initMainWindow();
+	SDL_Renderer* renderer = Window::initRenderer(window);
 
 	// For main loop
 	bool running { true };
@@ -29,9 +25,24 @@ int main(int argc, char* argv[]) {
 				running = false;
 			}
 		}
+
+		// Render
+		SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255); // Dark grey
+		SDL_RenderClear(renderer);
+
+		SDL_SetRenderDrawColor(renderer, 255, 100, 0, 255); // Orange
+		SDL_FRect rect = { 300.0f, 200.0f, 200.0f, 150.0f };
+		SDL_RenderFillRect(renderer, &rect);
+
+		SDL_SetRenderDrawColor(renderer, 0, 200, 255, 255); // cyan
+		SDL_RenderLine(renderer, 0, 0, 800, 600);
+
+		SDL_RenderPresent(renderer);
+
 	}
 
-	// Clean up
+	// --- Clean up ---
+	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 

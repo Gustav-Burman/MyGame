@@ -22,7 +22,7 @@ link_directories(${SDL3_DIR}/lib)
 # Add source to this project's executable.
 add_executable (game 
 	"src/main.cpp"
-	"src/windows.cpp"
+	"src/window_utils.cpp"
 )
 
 target_link_libraries(game PRIVATE SDL3::SDL3)
