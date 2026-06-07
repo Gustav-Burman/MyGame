@@ -1,5 +1,4 @@
-#ifndef WINDOW_UTILS
-#define WINDOW_UTILS
+#pragma once
 
 #include <iostream>
 #include <SDL3/SDL.h>
@@ -16,5 +15,3 @@ namespace WindowUtils
 	// Create texture from surface from image at path
 	SDL_Texture* createTexture(SDL_Renderer* renderer, const char* path);
 }
-
-#endif

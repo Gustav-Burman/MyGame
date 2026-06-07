@@ -1,4 +1,3 @@
-
 #include "window_utils.h"
 
 namespace WindowUtils
