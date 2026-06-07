@@ -31,12 +31,17 @@ int main(int argc, char* argv[]) {
 			if (event.type == SDL_EVENT_QUIT) {
 				running = false;
 			}
+
+			if (event.type == SDL_EVENT_KEY_DOWN) {
+				if (event.key.scancode == SDL_SCANCODE_ESCAPE)
+					running = false;
+			}
 		}
 
 		SDL_RenderTexture(renderer, backgroundWithTrees, NULL, &destRect);
 		SDL_RenderPresent(renderer);
 
-	}
+	} // End main loop
 
 	// --- Clean up ---
 	SDL_DestroyRenderer(renderer);
