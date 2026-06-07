@@ -8,6 +8,6 @@ namespace Player {
 		int health;
 		int maxEnergy;
 		int energy;
-		int block;
+		int	block;
 	};
 }
