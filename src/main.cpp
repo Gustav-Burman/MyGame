@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
 #include "window_utils.h"
 
 int main(int argc, char* argv[]) {
@@ -12,8 +13,14 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	SDL_Window* window = Window::initMainWindow();
-	SDL_Renderer* renderer = Window::initRenderer(window);
+	int windowWidth{ 1200 };
+	int windowHeight{ 800 };
+
+	SDL_Window* window = WindowUtils::initMainWindow(windowWidth, windowHeight);
+	SDL_Renderer* renderer = WindowUtils::initRenderer(window);
+
+	SDL_Texture* backgroundWithTrees = WindowUtils::createTexture(renderer, "assets/background_with_trees.png");
+	SDL_FRect destRect = { 0, 0, windowWidth, windowHeight };
 
 	// For main loop
 	bool running { true };
@@ -26,17 +33,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		// Render
-		SDL_SetRenderDrawColor(renderer, 30, 30, 30, 255); // Dark grey
-		SDL_RenderClear(renderer);
-
-		SDL_SetRenderDrawColor(renderer, 255, 100, 0, 255); // Orange
-		SDL_FRect rect = { 300.0f, 200.0f, 200.0f, 150.0f };
-		SDL_RenderFillRect(renderer, &rect);
-
-		SDL_SetRenderDrawColor(renderer, 0, 200, 255, 255); // cyan
-		SDL_RenderLine(renderer, 0, 0, 800, 600);
-
+		SDL_RenderTexture(renderer, backgroundWithTrees, NULL, &destRect);
 		SDL_RenderPresent(renderer);
 
 	}
@@ -47,5 +44,4 @@ int main(int argc, char* argv[]) {
 	SDL_Quit();
 
 	return 0;
-
 }

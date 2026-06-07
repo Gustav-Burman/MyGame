@@ -1,13 +1,13 @@
 
 #include "window_utils.h"
 
-namespace Window
+namespace WindowUtils
 {
-	SDL_Window* initMainWindow() {
+	SDL_Window* initMainWindow(int width, int height) {
 		// Create window
 		SDL_Window* window = SDL_CreateWindow(
 			"My First Game",
-			800, 600,
+			width, height,
 			0
 		);
 
@@ -30,5 +30,22 @@ namespace Window
 		}
 
 		return renderer;
+	}
+
+	SDL_Texture* createTexture(SDL_Renderer* renderer, const char* path) {
+		SDL_Surface* surface = IMG_Load(path);
+		if (!surface) {
+			std::cerr << "IMG_Load Error: " << SDL_GetError() << "\n";
+			std::exit(1);
+		}
+
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_DestroySurface(surface);
+		if (!texture) {
+			std::cerr << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << "\n";
+			std::exit(1);
+		}
+
+		return texture;
 	}
 }
