@@ -33,7 +33,7 @@ link_directories(${SDL3_image_DIR}/i686-w64-mingw32/lib)
 add_executable (game 
 	"src/main.cpp"
 	"src/window_utils.cpp"
-)
+ "src/card.h" "src/card.cpp" "src/monster.h" "src/player.h" "src/game_state.h")
 
 # Copy assets folder to build configuration
 add_custom_command(TARGET game POST_BUILD

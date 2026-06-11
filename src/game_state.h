@@ -4,19 +4,29 @@
 #include "player.h"
 #include "monster.h"
 
-enum class TurnPhase {
-	PLAYER_PHASE,
-    ENEMY_PHASE
-};
+namespace GameState {
+	enum class TurnPhase {
+		PLAYER_PHASE,
+		ENEMY_PHASE
+	};
 
-class GameState {
-	Player player;
-	Monster monster;
+	class BattleState {
+	public:
+		BattleState()
+		{
+			// Shuffle deck into draw pile
+			// Draw cards
+		}
+
+	private:
+		Player::Player m_player{ Player::Player() };
+		Monster::Monster m_monster{ "Goblin" };
 	
-	std::vector<Card> drawPile;
-	std::vector<Card> hand;
-	std::vector<Card> discardPile;
+		/*std::vector<Card::Card> m_drawPile;
+		std::vector<Card::Card> m_hand;
+		std::vector<Card::Card> m_discardPile;
 
-	TurnPhase phase;
-	int turn;
-};
+		TurnPhase m_phase;
+		int m_turn;*/
+	};
+}

@@ -5,6 +5,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include "window_utils.h"
+#include "game_state.h"
 
 int main(int argc, char* argv[]) {
 	// Init SDL
@@ -25,6 +26,9 @@ int main(int argc, char* argv[]) {
 	// For main loop
 	bool running { true };
 	SDL_Event event;
+
+	// Init battle
+	GameState::BattleState battleState{ GameState::BattleState() };
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {
