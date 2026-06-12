@@ -10,15 +10,6 @@ namespace GameState {
 		ENEMY_PHASE
 	};
 
-	class GameState {
-	public:
-		GameState()
-		{
-			
-		}
-	private:
-	};
-
 	class BattleState {
 	public:
 		BattleState(const Card::Deck& deck)
