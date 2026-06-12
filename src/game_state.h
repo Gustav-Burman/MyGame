@@ -10,6 +10,20 @@ namespace GameState {
 		ENEMY_PHASE
 	};
 
+	class GameState {
+	public:
+		GameState()
+		{
+			
+		}
+		void addToDeck(Card::Card card)
+		{
+			m_deck.emplace_back(card);
+		}
+	private:
+		std::vector < Card::Card> m_deck{};
+	};
+
 	class BattleState {
 	public:
 		BattleState()
