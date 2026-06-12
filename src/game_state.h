@@ -16,19 +16,15 @@ namespace GameState {
 		{
 			
 		}
-		void addToDeck(Card::Card card)
-		{
-			m_deck.emplace_back(card);
-		}
 	private:
-		std::vector < Card::Card> m_deck{};
 	};
 
 	class BattleState {
 	public:
-		BattleState()
+		BattleState(const Card::Deck& deck)
 		{
-			// Shuffle deck into draw pile
+			m_drawPile = deck;
+			m_drawPile.shuffle();
 			// Draw cards
 		}
 
@@ -36,8 +32,8 @@ namespace GameState {
 		Player::Player m_player{ Player::Player() };
 		Monster::Monster m_monster{ "Goblin" };
 	
-		/*std::vector<Card::Card> m_drawPile;
-		std::vector<Card::Card> m_hand;
+		Card::Deck m_drawPile;
+		/*std::vector<Card::Card> m_hand;
 		std::vector<Card::Card> m_discardPile;
 
 		TurnPhase m_phase;

@@ -6,6 +6,7 @@
 #include <SDL3_image/SDL_image.h>
 #include "window_utils.h"
 #include "game_state.h"
+#include "card.h"
 
 int main(int argc, char* argv[]) {
 	// Init SDL
@@ -27,8 +28,16 @@ int main(int argc, char* argv[]) {
 	bool running { true };
 	SDL_Event event;
 
+	// Init deck
+	Card::Deck deck{};
+	
+	for (int i = 0; i < 10; i++)
+	{
+		Card::Card strike{ Card::Card("strike", Card::CardType::ATTACK, i) };
+		deck.addCard(strike);
+	}
 	// Init battle
-	GameState::BattleState battleState{ GameState::BattleState() };
+	GameState::BattleState battleState{ deck };
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {
