@@ -3,44 +3,42 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include "constants.h"
 
-namespace Card {
-	enum class CardType {
+
+class Card {
+public:
+	enum Type {
 		ATTACK,
 		SKILL
 	};
+	Card(std::string name, Type type, int cost)
+		: m_name{ name }, m_type{ type }, m_cost{ cost }
+	{
 
-	class Card {
-	public:
-		Card(std::string name, CardType type, int cost)
-			: m_name{name}, m_type{type}, m_cost{cost}
-		{
+	}
+private:
+	std::string m_name;
+	Type m_type;
+	int m_cost;
+};
 
-		}
-	private:
-		std::string m_name;
-		CardType m_type;
-		int m_cost;
-	};
+class Deck {
+public:
+	Deck()
+	{
 
-	class Deck {
-	public:
-		Deck()
-		{
+	}
 
-		}
+	void addCard(Card card) { m_cards.emplace_back(card); }
 
-		void addCard(Card card) { m_cards.emplace_back(card); }
+	bool shuffle()
+	{
+		if (m_cards.empty()) return false;
+		std::ranges::shuffle(m_cards, G_RNG_SEED);
+		return true;
+	}
 
-		bool shuffle()
-		{
-			if (m_cards.empty()) return false;
-			auto rng = std::default_random_engine{};
-			std::ranges::shuffle(m_cards, rng);
-			return true;
-		}
-
-	private:
-		std::vector<Card> m_cards{};
-	};
-}
+private:
+	std::vector<Card> m_cards{};
+};

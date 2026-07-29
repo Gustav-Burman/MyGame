@@ -15,29 +15,29 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	int windowWidth{ 1200 };
-	int windowHeight{ 800 };
+	float windowWidth{ 1200 };
+	float windowHeight{ 800 };
 
 	SDL_Window* window = WindowUtils::initMainWindow(windowWidth, windowHeight);
 	SDL_Renderer* renderer = WindowUtils::initRenderer(window);
 
 	SDL_Texture* backgroundWithTrees = WindowUtils::createTexture(renderer, "assets/background_with_trees.png");
-	SDL_FRect destRect = { 0, 0, windowWidth, windowHeight };
+	SDL_FRect destRect = { 0.0, 0.0, windowWidth, windowHeight };
 
 	// For main loop
-	bool running { true };
+	bool running{ true };
 	SDL_Event event;
 
 	// Init deck
-	Card::Deck deck{};
-	
+	Deck deck{};
+
 	for (int i = 0; i < 10; i++)
 	{
-		Card::Card strike{ Card::Card("strike", Card::CardType::ATTACK, i) };
+		Card strike{ Card::Card("strike", Card::Type::ATTACK, i) };
 		deck.addCard(strike);
 	}
 	// Init battle
-	GameState::BattleState battleState{ deck };
+	BattleState battleState{ deck };
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {
