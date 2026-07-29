@@ -15,7 +15,6 @@ public:
 	Card(std::string name, Type type, int cost)
 		: m_name{ name }, m_type{ type }, m_cost{ cost }
 	{
-
 	}
 private:
 	std::string m_name;
@@ -27,17 +26,11 @@ class Deck {
 public:
 	Deck()
 	{
-
 	}
-
 	void addCard(Card card) { m_cards.emplace_back(card); }
-
-	bool shuffle()
-	{
-		if (m_cards.empty()) return false;
-		std::ranges::shuffle(m_cards, G_RNG_SEED);
-		return true;
-	}
+	bool shuffle();
+	Card pop();
+	int size() { return m_cards.size(); }
 
 private:
 	std::vector<Card> m_cards{};

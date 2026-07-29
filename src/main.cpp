@@ -5,7 +5,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include "window_utils.h"
-#include "game_state.h"
+#include "battle_state.h"
 #include "card.h"
 
 int main(int argc, char* argv[]) {
@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
 	}
 	// Init battle
 	BattleState battleState{ deck };
+	battleState.init();
 
 	while (running) {
 		while (SDL_PollEvent(&event)) {

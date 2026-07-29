@@ -13,17 +13,17 @@ public:
 	BattleState(const Deck& deck)
 		: m_drawPile{ deck }
 	{
-		m_drawPile.shuffle();
-		// Draw cards
 	}
+	void init();
+	void draw(int nCards);
 
 private:
 	Player::Player m_player{ Player::Player() };
 	Monster::Monster m_monster{ "Goblin" };
 	
-	Deck m_drawPile;
-	/*std::vector<Card::Card> m_hand;
-	std::vector<Card::Card> m_discardPile;
+	Deck m_drawPile{};
+	Deck m_hand{};
+	/*std::vector<Card::Card> m_discardPile;
 
 	TurnPhase m_phase;
 	int m_turn;*/
