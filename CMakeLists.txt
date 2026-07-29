@@ -38,7 +38,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable (game 
 	"src/main.cpp"
 	"src/window_utils.cpp"
-	"src/card.h" "src/card.cpp" "src/monster.h" "src/player.h" "src/battle_state.h" "src/constants.h" "src/battle_state.cpp")
+	"src/card.h" "src/card.cpp" "src/monster.h" "src/player.h" "src/battle_state.h" "src/constants.h" "src/battle_state.cpp" "src/deck.h" "src/deck.cpp")
 target_link_libraries(game PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)
 
 # Copy assets folder to build configuration
@@ -51,6 +51,6 @@ add_custom_command(TARGET game POST_BUILD
 # Test executables
 add_executable(tests
     "tests/test_deck.cpp"
-)
+ "tests/test_battleState.cpp" "src/deck.cpp")
 target_include_directories(tests PRIVATE src)
 target_link_libraries(tests PRIVATE GTest::gtest_main)

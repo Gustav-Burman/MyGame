@@ -1,10 +1,5 @@
 #pragma once
 #include <string>
-#include <vector>
-#include <algorithm>
-#include <random>
-#include "constants.h"
-
 
 class Card {
 public:
@@ -20,18 +15,4 @@ private:
 	std::string m_name;
 	Type m_type;
 	int m_cost;
-};
-
-class Deck {
-public:
-	Deck()
-	{
-	}
-	void addCard(Card card) { m_cards.emplace_back(card); }
-	bool shuffle();
-	Card pop();
-	int size() { return m_cards.size(); }
-
-private:
-	std::vector<Card> m_cards{};
 };

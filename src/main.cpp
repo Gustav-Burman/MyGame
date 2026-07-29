@@ -7,6 +7,7 @@
 #include "window_utils.h"
 #include "battle_state.h"
 #include "card.h"
+#include "deck.h"
 
 int main(int argc, char* argv[]) {
 	// Init SDL

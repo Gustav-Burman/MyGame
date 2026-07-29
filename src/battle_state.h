@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "card.h"
+#include "deck.h"
 #include "player.h"
 #include "monster.h"
 
