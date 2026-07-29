@@ -16,6 +16,10 @@ public:
 	}
 	void init();
 	void draw(int nCards);
+	void discardHand();
+	int getDrawPileSize() const { return m_drawPile.size(); }
+	int getHandSize() const { return m_hand.size(); }
+	int getDiscardPileSize() const { return m_discardPile.size(); };
 
 private:
 	Player::Player m_player{ Player::Player() };
@@ -23,8 +27,8 @@ private:
 	
 	Deck m_drawPile{};
 	Deck m_hand{};
-	/*std::vector<Card::Card> m_discardPile;
+	Deck m_discardPile{};
 
-	TurnPhase m_phase;
-	int m_turn;*/
+	//TurnPhase m_phase;
+	//int m_turn;
 };

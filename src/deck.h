@@ -10,10 +10,16 @@ public:
 	Deck()
 	{
 	}
+
 	void addCard(Card card) { m_cards.emplace_back(card); }
 	bool shuffle();
 	Card pop();
-	int size() { return m_cards.size(); }
+	int size()	 const { return m_cards.size(); }
+	auto begin()	   { return m_cards.begin(); }
+	auto end()		   { return m_cards.end(); }
+	auto begin() const { return m_cards.begin(); }
+	auto end()   const { return m_cards.end(); }
+	void clear() { m_cards.clear(); }
 
 private:
 	std::vector<Card> m_cards{};

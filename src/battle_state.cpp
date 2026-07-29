@@ -3,12 +3,29 @@
 void BattleState::init()
 {
 	m_drawPile.shuffle();
-	draw(5);
 }
 
 void BattleState::draw(int nCards)
 {
-	Card card{ m_drawPile.pop() };
-	m_hand.addCard(card);
-	std::cout << "Card drawn\n";
+	//std::move(m_drawPile.begin(), m_drawPile.begin() + nCards, std::back_inserter(m_hand));
+	for (size_t i = 0; i < nCards; i++)
+	{
+		if (m_drawPile.size() == 0)
+		{
+			continue;
+		}
+		Card card{ m_drawPile.pop() };
+		m_hand.addCard(card);
+	}
+}
+
+void BattleState::discardHand()
+{
+	//std::move(m_hand.begin(), m_hand.end(), std::back_inserter(m_discardPile));
+	//m_hand.clear();
+	for (auto& card : m_hand)
+	{
+		m_discardPile.addCard(std::move(card));
+	}
+	m_hand.clear();
 }

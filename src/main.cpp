@@ -32,15 +32,11 @@ int main(int argc, char* argv[]) {
 	// Init deck
 	Deck deck{};
 
-	for (int i = 0; i < 10; i++)
-	{
-		Card strike{ Card::Card("strike", Card::Type::ATTACK, i) };
-		deck.addCard(strike);
-	}
 	// Init battle
-	BattleState battleState{ deck };
-	battleState.init();
+	BattleState battle{ deck };
+	battle.init();
 
+	// Main game loop
 	while (running) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_EVENT_QUIT) {
