@@ -51,6 +51,6 @@ add_custom_command(TARGET game POST_BUILD
 # Test executables
 add_executable(tests
     "tests/test_deck.cpp"
- "tests/test_battle.cpp" "src/deck.cpp" "src/battle_state.cpp")
+ "tests/test_card_draw.cpp" "src/deck.cpp" "src/battle_state.cpp")
 target_include_directories(tests PRIVATE src)
 target_link_libraries(tests PRIVATE GTest::gtest_main)

@@ -21,7 +21,7 @@ void addCards(Deck& deck, const int nCardsToAdd)
 	}
 }
 
-TEST(BattleTest, InitDrawPile)
+TEST(CardDrawTest, InitDrawPile)
 {
 	const Deck deck{ buildStarterDeck() };
 	int deckSize = deck.size();
@@ -32,7 +32,7 @@ TEST(BattleTest, InitDrawPile)
 	EXPECT_EQ(battle.getDiscardPileSize(), 0);
 }
 
-TEST(BattleTest, InitDrawPileWithEmptyDeck)
+TEST(CardDrawTest, InitDrawPileWithEmptyDeck)
 {
 	const Deck deck{};
 	BattleState battle{ deck };
@@ -42,7 +42,7 @@ TEST(BattleTest, InitDrawPileWithEmptyDeck)
 	EXPECT_EQ(battle.getDiscardPileSize(), 0);
 }
 
-TEST(BattleTest, DrawFiveCards)
+TEST(CardDrawTest, DrawFiveCards)
 {
 	int nCardsToDraw{ 5 };
 	const Deck deck{ buildStarterDeck() };
@@ -55,7 +55,7 @@ TEST(BattleTest, DrawFiveCards)
 	EXPECT_EQ(battle.getDiscardPileSize(), 0);
 }
 
-TEST(BattleTest, TryToDrawWhenNoCardsAvailable)
+TEST(CardDrawTest, TryToDrawWhenNoCardsAvailable)
 {
 	int nCardsToDraw{ 1 };
 	const Deck deck{};
@@ -67,7 +67,7 @@ TEST(BattleTest, TryToDrawWhenNoCardsAvailable)
 	EXPECT_EQ(battle.getDiscardPileSize(), 0);
 }
 
-TEST(BattleTest, DiscardHand)
+TEST(CardDrawTest, DiscardHand)
 {
 	int nCardsToDraw{ 5 };
 	BattleState battle{ initBattleWithStarterDeckAndDrawCards(nCardsToDraw) };
@@ -77,7 +77,7 @@ TEST(BattleTest, DiscardHand)
 	EXPECT_EQ(battle.getDiscardPileSize(), nCardsToDraw);
 }
 
-TEST(BattleTest, ShuffleDrawpile)
+TEST(CardDrawTest, ShuffleDrawpile)
 {
 	int nCardsInDeck{ 6 };
 	int nCardsToDraw{ 5 };
@@ -97,7 +97,7 @@ TEST(BattleTest, ShuffleDrawpile)
 	EXPECT_EQ(battle.getHandSize(), nCardsToDraw);
 }
 
-TEST(BattleTest, DrawMoreThanMaxHandSize)
+TEST(CardDrawTest, DrawMoreThanMaxHandSize)
 {
 	int nCardsInDeck{ 11 };
 	int nCardsToDraw{ 11 };
