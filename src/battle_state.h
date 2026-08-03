@@ -3,6 +3,7 @@
 #include "deck.h"
 #include "player.h"
 #include "monster.h"
+#include "constants.h"
 
 class BattleState {
 public:

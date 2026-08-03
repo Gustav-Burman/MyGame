@@ -7,12 +7,16 @@ void BattleState::init()
 
 void BattleState::draw(int nCards)
 {
-	//std::move(m_drawPile.begin(), m_drawPile.begin() + nCards, std::back_inserter(m_hand));
 	for (size_t i = 0; i < nCards; i++)
 	{
-		if (m_drawPile.size() == 0)
+		if (m_hand.size() == MAX_HAND_SIZE) return;
+		if (m_drawPile.isEmpty()) // Need to shuffle more cards in
 		{
-			continue;
+			if (m_discardPile.isEmpty()) return; // Can't shuffle more cards into draw pile
+
+			m_drawPile = std::move(m_discardPile);
+			m_discardPile.clear();
+			m_drawPile.shuffle();
 		}
 		Card card{ m_drawPile.pop() };
 		m_hand.addCard(card);
@@ -21,8 +25,6 @@ void BattleState::draw(int nCards)
 
 void BattleState::discardHand()
 {
-	//std::move(m_hand.begin(), m_hand.end(), std::back_inserter(m_discardPile));
-	//m_hand.clear();
 	for (auto& card : m_hand)
 	{
 		m_discardPile.addCard(std::move(card));

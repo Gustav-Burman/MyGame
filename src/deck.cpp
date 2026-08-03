@@ -1,5 +1,6 @@
 #include "deck.h"
 
+// Member functions
 bool Deck::shuffle()
 {
 	if (m_cards.empty()) return false;
@@ -13,6 +14,8 @@ Card Deck::pop()
 	return card;
 }
 
+
+// Non-member functions
 Deck buildStarterDeck()
 {
 	Deck deck{};
