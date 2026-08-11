@@ -7,11 +7,15 @@
 
 class Deck {
 public:
-	Deck()
-	{
-	}
+	Deck() {}
 
-	void addCard(Card card) { m_cards.emplace_back(card); }
+	Deck(const Deck&) = delete;
+	Deck& operator=(const Deck&) = delete;
+
+	Deck(Deck&&) noexcept = default;
+	Deck& operator=(Deck&&) noexcept = default;
+
+	void addCard(Card card) { m_cards.emplace_back(std::move(card)); }
 	bool shuffle();
 	Card pop();
 	int size()	   const { return m_cards.size(); }

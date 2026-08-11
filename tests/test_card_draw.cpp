@@ -1,31 +1,14 @@
 #include <gtest/gtest.h>
-#include "battle_state.h"
-#include "deck.h"
-#include "constants.h"
-
-BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw)
-{
-	const Deck deck{ buildStarterDeck() };
-	BattleState battle{ deck };
-	battle.init();
-	battle.draw(nCardsToDraw);
-	return battle;
-}
-
-void addCards(Deck& deck, const int nCardsToAdd)
-{
-	Card strike{ "strike", Card::Type::ATTACK, 1 };
-	for (int i = 0; i < nCardsToAdd; i++)
-	{
-		deck.addCard(strike);
-	}
-}
+//#include "battle_state.h"
+//#include "deck.h"
+//#include "constants.h"
+#include "test_utils.cpp"
 
 TEST(CardDrawTest, InitDrawPile)
 {
-	const Deck deck{ buildStarterDeck() };
+	Deck deck{ buildStarterDeck() };
 	int deckSize = deck.size();
-	BattleState battle{ deck };
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	EXPECT_EQ(battle.getDrawPileSize(), deckSize);
 	EXPECT_EQ(battle.getHandSize(), 0);
@@ -34,8 +17,8 @@ TEST(CardDrawTest, InitDrawPile)
 
 TEST(CardDrawTest, InitDrawPileWithEmptyDeck)
 {
-	const Deck deck{};
-	BattleState battle{ deck };
+	Deck deck{};
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	EXPECT_EQ(battle.getDrawPileSize(), 0);
 	EXPECT_EQ(battle.getHandSize(), 0);
@@ -45,9 +28,9 @@ TEST(CardDrawTest, InitDrawPileWithEmptyDeck)
 TEST(CardDrawTest, DrawFiveCards)
 {
 	int nCardsToDraw{ 5 };
-	const Deck deck{ buildStarterDeck() };
+	Deck deck{ buildStarterDeck() };
 	int deckSize = deck.size();
-	BattleState battle{ deck };
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	battle.draw(nCardsToDraw);
 	EXPECT_EQ(battle.getDrawPileSize(), deckSize - nCardsToDraw);
@@ -58,8 +41,8 @@ TEST(CardDrawTest, DrawFiveCards)
 TEST(CardDrawTest, TryToDrawWhenNoCardsAvailable)
 {
 	int nCardsToDraw{ 1 };
-	const Deck deck{};
-	BattleState battle{ deck };
+	Deck deck{};
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	battle.draw(nCardsToDraw);
 	EXPECT_EQ(battle.getDrawPileSize(), 0);
@@ -70,7 +53,7 @@ TEST(CardDrawTest, TryToDrawWhenNoCardsAvailable)
 TEST(CardDrawTest, DiscardHand)
 {
 	int nCardsToDraw{ 5 };
-	BattleState battle{ initBattleWithStarterDeckAndDrawCards(nCardsToDraw) };
+	BattleState battle{ TestUtils::initBattleWithStarterDeckAndDrawCards(nCardsToDraw) };
 	EXPECT_EQ(battle.getHandSize(), nCardsToDraw);
 	battle.discardHand();
 	EXPECT_EQ(battle.getHandSize(), 0);
@@ -82,9 +65,9 @@ TEST(CardDrawTest, ShuffleDrawpile)
 	int nCardsInDeck{ 6 };
 	int nCardsToDraw{ 5 };
 	Deck deck{};
-	addCards(deck, nCardsInDeck);
+	TestUtils::addStrikes(deck, nCardsInDeck);
 
-	BattleState battle{ deck };
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	battle.draw(nCardsToDraw);
 	battle.discardHand();
@@ -101,11 +84,10 @@ TEST(CardDrawTest, DrawMoreThanMaxHandSize)
 {
 	int nCardsInDeck{ 11 };
 	int nCardsToDraw{ 11 };
-	Card strike{ "strike", Card::Type::ATTACK, 1 };
 	Deck deck{};
-	addCards(deck, nCardsInDeck);
+	TestUtils::addStrikes(deck, nCardsInDeck);
 
-	BattleState battle{ deck };
+	BattleState battle{ std::move(deck) };
 	battle.init();
 	battle.draw(nCardsToDraw);
 	EXPECT_EQ(battle.getDrawPileSize(), nCardsInDeck - MAX_HAND_SIZE);

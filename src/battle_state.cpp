@@ -18,8 +18,7 @@ void BattleState::draw(int nCards)
 			m_discardPile.clear();
 			m_drawPile.shuffle();
 		}
-		Card card{ m_drawPile.pop() };
-		m_hand.addCard(card);
+		m_hand.addCard(std::move(m_drawPile.pop()));
 	}
 }
 

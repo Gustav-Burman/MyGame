@@ -11,8 +11,8 @@ public:
 		PLAYER_PHASE,
 		ENEMY_PHASE
 	};
-	BattleState(const Deck& deck)
-		: m_drawPile{ deck }
+	BattleState(Deck deck)
+		: m_drawPile{ std::move(deck) }
 	{
 	}
 	void init();
@@ -20,11 +20,12 @@ public:
 	void discardHand();
 	int getDrawPileSize() const { return m_drawPile.size(); }
 	int getHandSize() const { return m_hand.size(); }
-	int getDiscardPileSize() const { return m_discardPile.size(); };
+	int getDiscardPileSize() const { return m_discardPile.size(); }
+	Monster& getMonster() { return m_monster; }
 
 private:
 	Player::Player m_player{ Player::Player() };
-	Monster::Monster m_monster{ "Goblin" };
+	Monster m_monster{ "Goblin" };
 	
 	Deck m_drawPile{};
 	Deck m_hand{};

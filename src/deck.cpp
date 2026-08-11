@@ -9,7 +9,7 @@ bool Deck::shuffle()
 }
 Card Deck::pop()
 {
-	Card card{ m_cards.back() };
+	Card card = std::move(m_cards.back());
 	m_cards.pop_back();
 	return card;
 }
@@ -24,9 +24,9 @@ Deck buildStarterDeck()
 	Card bonk{ "bonk", Card::Type::ATTACK, 2 };
 	for (int i = 0; i < 4; i++)
 	{
-		deck.addCard(strike);
-		deck.addCard(defend);
+		deck.addCard(std::move(strike));
+		deck.addCard(std::move(defend));
 	}
-	deck.addCard(bonk);
+	deck.addCard(std::move(bonk));
 	return deck;
 }
