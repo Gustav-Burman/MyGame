@@ -30,8 +30,10 @@ public:
 	Monster& operator=(Monster&& monster) noexcept = default;
 
 
-	const std::string& getName()   const { return m_name; }
-	const int          getHealth() const { return m_health; }
+	const std::string& getName()      const { return m_name; }
+	const int          getHealth()    const { return m_health; }
+	const int          getMaxHealth() const { return m_maxHealth; }
+	const Type         getType()      const { return m_type; }
 	void takeDamage(int damage);
 
 private:
