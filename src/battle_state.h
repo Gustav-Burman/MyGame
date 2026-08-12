@@ -18,6 +18,7 @@ public:
 	void init();
 	void draw(int nCards);
 	void discardHand();
+	void addMonster(Monster monster);
 	int getDrawPileSize() const { return m_drawPile.size(); }
 	int getHandSize() const { return m_hand.size(); }
 	int getDiscardPileSize() const { return m_discardPile.size(); }
@@ -25,7 +26,7 @@ public:
 
 private:
 	Player::Player m_player{ Player::Player() };
-	Monster m_monster{ "Goblin" };
+	Monster m_monster{};
 	
 	Deck m_drawPile{};
 	Deck m_hand{};

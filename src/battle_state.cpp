@@ -30,3 +30,8 @@ void BattleState::discardHand()
 	}
 	m_hand.clear();
 }
+
+void BattleState::addMonster(Monster monster)
+{
+	m_monster = std::move(monster);
+}
