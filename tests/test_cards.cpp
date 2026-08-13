@@ -1,6 +1,14 @@
 #include <gtest/gtest.h>
 #include "battle_state.h"
 
+
+TEST(cardsTest, buildCardLibrary)
+{
+	std::unordered_map<std::string, CardDefinition> library = CardLibrary::buildCardLibrary();
+	EXPECT_EQ(library["Strike"].getName(), "Strike");
+	EXPECT_EQ(library["Defend"].getName(), "Defend");
+}
+
 TEST(cardsTest, MonsterTakingDamageOnDamageEffect)
 {
 	int damage{ 5 };
