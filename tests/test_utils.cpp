@@ -12,7 +12,7 @@ namespace TestUtils {
 
 	void addStrikes(Deck& deck, const int nCardsToAdd)
 	{
-		Card strike{ "strike", Card::Type::ATTACK, 1 };
+		Card strike{ "strike", CardDefinition::Type::ATTACK, 1 };
 		for (int i = 0; i < nCardsToAdd; i++)
 		{
 			deck.addCard(std::move(strike));

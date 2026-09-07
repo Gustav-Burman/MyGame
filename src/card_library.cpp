@@ -7,24 +7,24 @@ namespace CardLibrary
 	};
 	CardDefinition strike
 	{
-		"Strike",
-		Card::Type::ATTACK,
-		1, // Cost
-		strikeEffects,
-		"Deal 6 damage",
-		Card::Rarity::COMMON
+		.name = "Strike",
+		.type = CardDefinition::Type::ATTACK,
+		.cost = 1,
+		.rarity = CardDefinition::Rarity::COMMON,
+		.description = "Deal 6 damage",
+		.effects = strikeEffects
 	};
 	std::unordered_map<CardDefinition::Effect, int, EnumHash> defendEffects = {
 		{CardDefinition::Effect::BLOCK, 5}
 	};
 	CardDefinition defend
 	{
-		"Defend",
-		Card::Type::SKILL,
-		1, // Cost
-		defendEffects,
-		"Gain 5 block",
-		Card::Rarity::COMMON
+		.name = "Defend",
+		.type = CardDefinition::Type::SKILL,
+		.cost = 1,
+		.rarity = CardDefinition::Rarity::COMMON,
+		.description = "Gain 5 block",
+		.effects = defendEffects
 	};
 
 	std::unordered_map<std::string, CardDefinition> buildCardLibrary()

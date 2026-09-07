@@ -5,8 +5,13 @@
 #include "card_effects.h"
 #include "utils.h"
 
-class Card {
+struct CardDefinition {
 public:
+	enum Effect {
+		DAMAGE,
+		BLOCK,
+		DRAW
+	};
 	enum Type {
 		ATTACK,
 		SKILL,
@@ -17,8 +22,24 @@ public:
 		UNCOMMON,
 		RARE
 	};
-	Card(std::string name, Type type, int cost)
+
+	std::string name{ "" };
+	Type        type{ ATTACK };
+	int         cost{ 0 };
+	Rarity      rarity{ COMMON };
+	std::string description{ "" };
+	std::unordered_map<Effect, int, EnumHash> effects{};
+};
+
+class Card {
+public:
+	Card(std::string name, CardDefinition::Type type, int cost)
 		: m_name{ std::move(name) }, m_type{ type }, m_cost{ cost }
+	{
+	}
+
+	Card(CardDefinition def)
+		: m_name{ def.name }, m_type{ def.type }, m_cost{ def.cost }, m_description{ def.description }, m_rarity{ def.rarity }
 	{
 	}
 
@@ -28,41 +49,22 @@ public:
 	Card(Card&&) noexcept = default;
 	Card& operator=(Card&& card) noexcept = default;
 
-	// Public member variables
-	std::unique_ptr<CardEffect> m_effect{};
+	void addEffect(std::unique_ptr<CardEffect> effect) { m_effects.push_back(std::move(effect)); }
+	void execute(BattleState& battle) { for (auto& effect : m_effects) effect->execute(battle); }
 
 private:
-	std::string m_name;
-	Type m_type;
-	int m_cost;
+	std::string m_name{ "" };
+	CardDefinition::Type m_type{ CardDefinition::ATTACK };
+	int m_cost{ 0 };
 	std::string m_description{ "" };
+	CardDefinition::Rarity m_rarity{ CardDefinition::COMMON };
+	std::vector<std::unique_ptr<CardEffect>> m_effects{};
 };
 
 
-class CardDefinition {
-public:
-	enum Effect {
-		DAMAGE,
-		BLOCK,
-		DRAW
-	};
-	CardDefinition() {}
-	CardDefinition(std::string name, Card::Type type, int cost, std::unordered_map<Effect, int, EnumHash> effects, std::string description, Card::Rarity rarity)
-		: m_name{ std::move(name) }, m_type{ type }, m_cost{ cost }, m_effects{ effects },
-		m_description { std::move(description) }, m_rarity{ rarity }
-	{
-	}
-	std::string getName() const { return m_name; }
-private:
-	std::string m_name;
-	Card::Type m_type;
-	std::unordered_map<Effect, int, EnumHash> m_effects;
-	int m_cost;
-	std::string m_description{ "" };
-	Card::Rarity m_rarity;
-};
-
-// Card builder function
+// Related functions
 namespace CardLibrary {
 	std::unordered_map<std::string, CardDefinition> buildCardLibrary();
 }
+
+Card buildCard(CardDefinition def);

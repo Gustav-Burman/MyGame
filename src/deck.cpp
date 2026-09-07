@@ -19,9 +19,9 @@ Card Deck::pop()
 Deck buildStarterDeck()
 {
 	Deck deck{};
-	Card strike{ "strike", Card::Type::ATTACK, 1 };
-	Card defend{ "defend", Card::Type::SKILL, 1 };
-	Card bonk{ "bonk", Card::Type::ATTACK, 2 };
+	Card strike{ "strike", CardDefinition::Type::ATTACK, 1 };
+	Card defend{ "defend", CardDefinition::Type::SKILL, 1 };
+	Card bonk{ "bonk", CardDefinition::Type::ATTACK, 2 };
 	for (int i = 0; i < 4; i++)
 	{
 		deck.addCard(std::move(strike));
