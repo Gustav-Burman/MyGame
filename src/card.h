@@ -33,7 +33,7 @@ public:
 
 class Card {
 public:
-	Card(std::string name, CardDefinition::Type type, int cost)
+	Card(std::string name, CardDefinition::Type type, int cost) // Remove
 		: m_name{ std::move(name) }, m_type{ type }, m_cost{ cost }
 	{
 	}

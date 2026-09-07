@@ -2,19 +2,17 @@
 #include "battle_state.h"
 
 
-TEST(cardsTest, buildCardLibrary)
+std::unordered_map<std::string, CardDefinition> CARD_LIBRARY = CardLibrary::buildCardLibrary();
+
+TEST(cardsTest, cardLibrary)
 {
-	std::unordered_map<std::string, CardDefinition> library = CardLibrary::buildCardLibrary();
-	EXPECT_EQ(library["Strike"].name, "Strike");
-	EXPECT_EQ(library["Defend"].name, "Defend");
+	EXPECT_EQ(CARD_LIBRARY["Strike"].name, "Strike");
+	EXPECT_EQ(CARD_LIBRARY["Defend"].name, "Defend");
 }
 
 TEST(cardsTest, MonsterTakingDamageOnDamageEffect)
 {
-	// Create strike
-	int damage{ 6 };
-	Card strike{ "Strike", CardDefinition::ATTACK, 1 };
-	strike.addEffect( std::make_unique<DamageEffect>(damage) );
+	Card strike{ buildCard(CARD_LIBRARY["Strike"]) };
 
 	// Init deck
 	Deck deck{};
@@ -29,5 +27,5 @@ TEST(cardsTest, MonsterTakingDamageOnDamageEffect)
 	EXPECT_EQ(battle.getMonster().getType(), Monster::Type::BASIC);
 	
 	strike.execute(battle);
-	EXPECT_EQ(battle.getMonster().getHealth(), health - damage);
+	EXPECT_EQ(battle.getMonster().getHealth(), health - 6);
 }
