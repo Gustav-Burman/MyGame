@@ -12,9 +12,10 @@ namespace TestUtils {
 
 	void addStrikes(Deck& deck, const int nCardsToAdd)
 	{
-		Card strike{ "strike", CardDefinition::Type::ATTACK, 1 };
+		libMap lib = CardLibrary::getInstance()->getLib();
 		for (int i = 0; i < nCardsToAdd; i++)
 		{
+			Card strike{ buildCard(lib["Strike"]) };
 			deck.addCard(std::move(strike));
 		}
 	}

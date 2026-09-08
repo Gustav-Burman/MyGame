@@ -63,8 +63,5 @@ private:
 
 
 // Related functions
-namespace CardLibrary {
-	std::unordered_map<std::string, CardDefinition> buildCardLibrary();
-}
 
 Card buildCard(CardDefinition def);

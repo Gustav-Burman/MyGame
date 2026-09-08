@@ -2,6 +2,7 @@
 #include "battle_state.h"
 #include "deck.h"
 #include "constants.h"
+#include "card_library.h"
 
 namespace TestUtils {
 	BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw);
