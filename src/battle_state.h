@@ -2,7 +2,7 @@
 #include <vector>
 #include "deck.h"
 #include "player.h"
-#include "monster.h"
+#include "monsters/monster.h"
 #include "constants.h"
 
 class BattleState {
@@ -23,9 +23,13 @@ public:
 	int getHandSize() const { return m_hand.size(); }
 	int getDiscardPileSize() const { return m_discardPile.size(); }
 	Monster& getMonster() { return m_monster; }
+	Player& getPlayer()   { return m_player; }
+
+	// Temp functions for debugging
+	void addPlayer(Player player) { m_player = player; }
 
 private:
-	Player::Player m_player{ Player::Player() };
+	Player m_player{ Player() };
 	Monster m_monster{};
 	
 	Deck m_drawPile{};

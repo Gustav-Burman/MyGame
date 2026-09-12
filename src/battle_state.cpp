@@ -33,5 +33,5 @@ void BattleState::discardHand()
 
 void BattleState::addMonster(Monster monster)
 {
-	m_monster = std::move(monster);
+	m_monster = monster;
 }

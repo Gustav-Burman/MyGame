@@ -3,18 +3,19 @@
 // Forward declare BattleState to avoid circular dependency
 class BattleState;
 
-class CardEffect {
+class MonsterAction {
 public:
 	virtual void execute(BattleState& battle) = 0;
-	virtual ~CardEffect() = default;
+	virtual ~MonsterAction() = default;
 };
 
-class DamageEffect : public CardEffect {
+class AttackAction : public MonsterAction
+{
 public:
-	explicit DamageEffect(int amount)
-		: m_amount{ amount } {}
+	explicit AttackAction(int baseAmount)
+		: m_baseAmount{ baseAmount } {}
 	void execute(BattleState& battle) override;
 
 private:
-	int m_amount{};
+	int m_baseAmount;
 };

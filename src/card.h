@@ -53,12 +53,12 @@ public:
 	void execute(BattleState& battle) { for (auto& effect : m_effects) effect->execute(battle); }
 
 private:
-	std::string m_name{ "" };
-	CardDefinition::Type m_type{ CardDefinition::ATTACK };
-	int m_cost{ 0 };
-	std::string m_description{ "" };
-	CardDefinition::Rarity m_rarity{ CardDefinition::COMMON };
-	std::vector<std::unique_ptr<CardEffect>> m_effects{};
+	std::string                              m_name        { "" };
+	CardDefinition::Type                     m_type        { CardDefinition::ATTACK };
+	int                                      m_cost        { 0 };
+	std::string                              m_description { "" };
+	CardDefinition::Rarity                   m_rarity      { CardDefinition::COMMON };
+	std::vector<std::unique_ptr<CardEffect>> m_effects     {};
 };
 
 
