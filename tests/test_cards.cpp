@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 #include "battle_state.h"
+#include "card_library.h"
 
 
-std::unordered_map<std::string, CardDefinition> CARD_LIBRARY = CardLibrary::buildCardLibrary();
+libMap CARD_LIBRARY = CardLibrary::getInstance()->getLib();
 
 TEST(cardsTest, cardLibrary)
 {

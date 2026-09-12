@@ -1,4 +1,5 @@
 #include "deck.h"
+#include "card_library.h"
 
 // Member functions
 bool Deck::shuffle()
@@ -18,15 +19,14 @@ Card Deck::pop()
 // Non-member functions
 Deck buildStarterDeck()
 {
+	libMap lib = CardLibrary::getInstance()->getLib();
 	Deck deck{};
-	Card strike{ "strike", CardDefinition::Type::ATTACK, 1 };
-	Card defend{ "defend", CardDefinition::Type::SKILL, 1 };
-	Card bonk{ "bonk", CardDefinition::Type::ATTACK, 2 };
 	for (int i = 0; i < 4; i++)
 	{
+		Card strike{ lib["Strike"] };
+		Card defend{ lib["Defend"] };
 		deck.addCard(std::move(strike));
 		deck.addCard(std::move(defend));
 	}
-	deck.addCard(std::move(bonk));
 	return deck;
 }

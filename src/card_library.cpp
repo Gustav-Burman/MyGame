@@ -1,5 +1,7 @@
 #include "card_library.h"
 
+CardLibrary* CardLibrary::instance = nullptr;
+
 CardLibrary* CardLibrary::getInstance()
 {
 	if (instance == nullptr)
@@ -8,8 +10,6 @@ CardLibrary* CardLibrary::getInstance()
 	}
 	return instance;
 }
-
-
 
 libMap buildCardLibrary()
 {

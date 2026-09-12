@@ -9,5 +9,5 @@ TEST(DeckTest, AddCardToDeck) {
 
 TEST(DeckTest, StarterDeckHasCorrectSize) {
 	auto deck{ buildStarterDeck() };
-	EXPECT_EQ(deck.size(), 9);
+	EXPECT_EQ(deck.size(), 8);
 }

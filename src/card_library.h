@@ -22,8 +22,9 @@ private:
 	CardLibrary(libMap library)
 		: m_library {library}
 	{};
-	static CardLibrary* instance;
+
 	libMap m_library;
+	static CardLibrary* instance;
 };
 
 // Non-member functions
