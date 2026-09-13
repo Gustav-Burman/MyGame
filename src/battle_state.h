@@ -2,7 +2,7 @@
 #include <vector>
 #include "deck.h"
 #include "player.h"
-#include "monsters/monster.h"
+#include "monster/monster.h"
 #include "constants.h"
 
 class BattleState {
@@ -18,7 +18,7 @@ public:
 	void init();
 	void draw(int nCards);
 	void discardHand();
-	void addMonster(Monster monster);
+	void addMonster(Monster&& monster);
 	int getDrawPileSize() const { return m_drawPile.size(); }
 	int getHandSize() const { return m_hand.size(); }
 	int getDiscardPileSize() const { return m_discardPile.size(); }

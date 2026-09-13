@@ -1,5 +1,5 @@
 #pragma once
-#include "card.h"
+#include "card/card.h"
 #include <vector>
 #include <algorithm>
 #include <random>

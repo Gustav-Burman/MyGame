@@ -7,11 +7,12 @@ class Goblin : public Monster
 {
 public:
 	Goblin()
-		: Monster(std::string("Goblin"), BASIC, 30)
+		: Monster(std::string("Goblin"), MonsterDef::BASIC, 30)
 	{
 	}
 	void action(BattleState& battle) { m_action->execute(battle); }
 
 private:
-	std::unique_ptr<MonsterAction> m_action = std::make_unique<AttackAction>(5);
+	int baseDamage = 5;
+	std::unique_ptr<MonsterAction> m_action = std::make_unique<AttackAction>(baseDamage);
 };

@@ -4,3 +4,7 @@
 void DamageEffect::execute(BattleState& battle) {
 	battle.getMonster().takeDamage(m_amount);
 }
+
+void BlockEffect::execute(BattleState& battle) {
+	battle.getPlayer().addBlock(m_amount);
+}

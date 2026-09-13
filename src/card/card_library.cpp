@@ -14,27 +14,27 @@ CardLibrary* CardLibrary::getInstance()
 libMap buildCardLibrary()
 {
 	effectMap strikeEffects = {
-		{CardDefinition::Effect::DAMAGE, 6}
+		{CardDef::Effect::DAMAGE, 6}
 	};
-	CardDefinition strike
+	CardDef strike
 	{
 		.name = "Strike",
-		.type = CardDefinition::Type::ATTACK,
+		.type = CardDef::Type::ATTACK,
 		.cost = 1,
-		.rarity = CardDefinition::Rarity::COMMON,
+		.rarity = CardDef::Rarity::COMMON,
 		.description = "Deal 6 damage",
 		.effects = strikeEffects
 	};
 
 	effectMap defendEffects = {
-		{CardDefinition::Effect::BLOCK, 5}
+		{CardDef::Effect::BLOCK, 5}
 	};
-	CardDefinition defend
+	CardDef defend
 	{
 		.name = "Defend",
-		.type = CardDefinition::Type::SKILL,
+		.type = CardDef::Type::SKILL,
 		.cost = 1,
-		.rarity = CardDefinition::Rarity::COMMON,
+		.rarity = CardDef::Rarity::COMMON,
 		.description = "Gain 5 block",
 		.effects = defendEffects
 	};

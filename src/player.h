@@ -12,7 +12,9 @@ public:
 	const std::string& getName()      const { return m_name; }
 	const int          getMaxHealth() const { return m_maxHealth; }
 	const int          getHealth()    const { return m_health; }
+
 	void takeDamage(int amount);
+	void addBlock(int amount);
 
 private:
 	std::string m_name{ "" };

@@ -3,7 +3,7 @@
 
 TEST(DeckTest, AddCardToDeck) {
 	auto deck{ Deck() };
-	deck.addCard(Card{ "Name", CardDefinition::ATTACK, 2 });
+	deck.addCard(Card{ "Name", CardDef::ATTACK, 2 });
 	EXPECT_EQ(deck.size(), 1);
 }
 

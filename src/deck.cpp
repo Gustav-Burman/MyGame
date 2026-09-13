@@ -1,5 +1,5 @@
 #include "deck.h"
-#include "card_library.h"
+#include "card/card_library.h"
 
 // Member functions
 bool Deck::shuffle()

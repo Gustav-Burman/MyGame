@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include "card.h"
 
-typedef std::unordered_map<std::string, CardDefinition> libMap;
-typedef std::unordered_map<CardDefinition::Effect, int, EnumHash> effectMap;
+typedef std::unordered_map<std::string, CardDef> libMap;
+typedef std::unordered_map<CardDef::Effect, int, EnumHash> effectMap;
 
 class CardLibrary {
 public:

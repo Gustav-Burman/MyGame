@@ -18,3 +18,13 @@ public:
 private:
 	int m_amount{};
 };
+
+class BlockEffect : public CardEffect {
+public:
+	explicit BlockEffect(int amount)
+		: m_amount{ amount } {}
+	void execute(BattleState& battle) override;
+
+private:
+	int m_amount{};
+};
