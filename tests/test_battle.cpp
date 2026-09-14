@@ -39,5 +39,5 @@ TEST(battleTest, PlayerTakingDamageOnGoblinAttack)
 
 	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth());
 	battle.getMonster().execute(battle);
-	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth() - goblinDef.actions.at(MonsterDef::Action::ATTACK));
+	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth() - goblinDef.actions.at(0));
 }

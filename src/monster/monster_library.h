@@ -4,8 +4,8 @@
 #include <unordered_map>
 #include "monster.h"
 
-std::unordered_map<MonsterDef::Action, int, EnumHash> goblinActions = {
-	{ MonsterDef::Action::ATTACK, 8 }
+std::unordered_map<int, int> goblinActions = {
+	{ 0, 8 }
 };
 
 const std::unordered_map<std::string, MonsterDef> MONSTER_LIBRARY =

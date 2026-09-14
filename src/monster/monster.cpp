@@ -19,11 +19,7 @@ Monster buildMonster(MonsterDef def)
 	Monster monster{ def };
 	for (const auto& [action, value] : def.actions)
 	{
-		switch (action)
-		{
-		case MonsterDef::ATTACK:
-			monster.addAction(std::make_unique<AttackAction>(value));
-		}
+		monster.addAction(std::make_unique<AttackAction>(value));
 	}
 	return monster;
 }

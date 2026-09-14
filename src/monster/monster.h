@@ -22,7 +22,7 @@ public:
 	Type										type		{ NONE };
 	int											maxHealth   { 0 };
 
-	std::unordered_map<Action, int, EnumHash> actions{};
+	std::unordered_map<int, int> actions{};
 };
 
 class Monster {
