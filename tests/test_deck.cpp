@@ -17,7 +17,7 @@ TEST(DeckTest, StarterDeckHasCorrectSize) {
 TEST(DeckTest, defendBlocksCorrectAmount) {
 	CardDef defendDef{ CARD_LIBRARY.at("Defend") };
 	Card defend{ buildCard(defendDef) };
-	BattleState battle = TestUtils::initBattleEmpty();
+	BattleState battle = TestUtils::initBattleNoEnemy();
 
 	EXPECT_EQ(battle.getPlayer().getBlock(), 0);
 	defend.execute(battle);

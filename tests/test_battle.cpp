@@ -1,10 +1,9 @@
 #include <gtest/gtest.h>
+#include "test_utils.h"
 #include "battle_state.h"
 #include "card/card_library.h"
-#include "monster/goblin.h"
+#include "card/card.h"
 #include "monster/monster_library.h"
-
-//libMap CARD_LIBRARY = CardLibrary::getInstance()->getLib();
 
 TEST(battleTest, cardLibrary)
 {
@@ -14,32 +13,26 @@ TEST(battleTest, cardLibrary)
 
 TEST(battleTest, MonsterTakingDamageOnDamageEffect)
 {
-	Card strike{ buildCard(CARD_LIBRARY.at("Strike")) };
+	CardDef strikeDef = CARD_LIBRARY.at("Strike");
+	Card strike{ buildCard(strikeDef) };
 
-	// Init deck
-	Deck deck{};
-	BattleState battle{ std::move(deck) };
-	MonsterDef goblinDef = MONSTER_LIBRARY.at("Goblin");
-	Monster goblin{ buildMonster(goblinDef) };
-	battle.addMonster( std::move(goblin) );
+	BattleState battle = TestUtils::initBattleGoblin();
 
-	EXPECT_EQ(battle.getMonster().getHealth(), goblinDef.maxHealth);
+	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at("Goblin").maxHealth);
 	strike.execute(battle);
-	EXPECT_EQ(battle.getMonster().getHealth(), goblinDef.maxHealth - 6);
+	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at("Goblin").maxHealth - strikeDef.effects.at(CardDef::Effect::DAMAGE));
 }
 
 TEST(battleTest, PlayerTakingDamageOnGoblinAttack)
 {
-	Player player{};
-	BattleState battle{ std::move(Deck{}) };
-	MonsterDef goblinDef = MONSTER_LIBRARY.at("Goblin");
-	Monster goblin{ buildMonster(goblinDef) };
-	battle.addMonster(std::move(goblin));
-	battle.addPlayer(player);
+	BattleState battle = TestUtils::initBattleGoblin();
 
 	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth());
 	battle.getMonster().execute(battle);
-	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth() - goblinDef.actions.at(0));
+	EXPECT_EQ(battle.getPlayer().getHealth(), battle.getPlayer().getMaxHealth() - MONSTER_LIBRARY.at("Goblin").actions.at(0));
 }
-
-//TEST(battleTest)
+//
+//TEST(battleTest, PlayerBlockingFullDamageFromMonster)
+//{
+//
+//}

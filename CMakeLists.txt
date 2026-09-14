@@ -51,6 +51,6 @@ add_custom_command(TARGET game POST_BUILD
 # Test executables
 add_executable(tests
     "tests/test_deck.cpp"
- 	"tests/test_card_draw.cpp" "src/deck.cpp" "src/battle_state.cpp" "src/card/card_effects.h" "src/card/card_effects.cpp" "src/monster/monster.cpp" "tests/test_battle.cpp" "tests/test_utils.h" "src/card/card_library.cpp" "src/card/card_library.h" "src/utils.h" "src/card/card.cpp" "src/monster/goblin.h" "src/monster/monster_actions.cpp" "src/player.cpp")
+ 	"tests/test_card_draw.cpp" "src/deck.cpp" "src/battle_state.cpp" "src/card/card_effects.h" "src/card/card_effects.cpp" "src/monster/monster.cpp" "tests/test_battle.cpp" "tests/test_utils.h" "src/card/card_library.cpp" "src/card/card_library.h" "src/utils.h" "src/card/card.cpp" "src/monster/goblin.h" "src/monster/monster_actions.cpp" "src/player.cpp" "src/monster/monster_library.cpp")
 target_include_directories(tests PRIVATE src)
 target_link_libraries(tests PRIVATE GTest::gtest_main)

@@ -11,5 +11,5 @@ using effectMap = std::unordered_map<CardDef::Effect, int, EnumHash>;
 // Global variables
 extern const libMap CARD_LIBRARY;
 
-// Non-member functions
+// functions
 libMap buildCardLibrary();

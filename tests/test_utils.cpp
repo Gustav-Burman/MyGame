@@ -1,12 +1,22 @@
 #include "test_utils.h"
 
 namespace TestUtils {
-	BattleState initBattleEmpty()
+	BattleState initBattleNoEnemy()
 	{
 		Deck deck{};
 		BattleState battle{ std::move(deck) };
-		//Player player{};
 		battle.addPlayer(Player{});
+		return battle;
+	}
+
+	BattleState initBattleGoblin()
+	{
+		Player player{};
+		BattleState battle{ std::move(Deck{}) };
+		MonsterDef goblinDef = MONSTER_LIBRARY.at("Goblin");
+		Monster goblin{ buildMonster(goblinDef) };
+		battle.addMonster(std::move(goblin));
+		battle.addPlayer(player);
 		return battle;
 	}
 
