@@ -18,10 +18,12 @@ public:
 	void init();
 	void draw(int nCards);
 	void discardHand();
-	void addMonster(Monster&& monster);
 	int getDrawPileSize() const { return m_drawPile.size(); }
 	int getHandSize() const { return m_hand.size(); }
 	int getDiscardPileSize() const { return m_discardPile.size(); }
+
+	void addMonster(Monster&& monster);
+
 	Monster& getMonster() { return m_monster; }
 	Player& getPlayer()   { return m_player; }
 

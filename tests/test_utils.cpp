@@ -1,6 +1,15 @@
 #include "test_utils.h"
 
 namespace TestUtils {
+	BattleState initBattleEmpty()
+	{
+		Deck deck{};
+		BattleState battle{ std::move(deck) };
+		//Player player{};
+		battle.addPlayer(Player{});
+		return battle;
+	}
+
 	BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw)
 	{
 		Deck deck{ buildStarterDeck() };

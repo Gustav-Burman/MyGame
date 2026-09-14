@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "deck.h"
+#include "card/card_library.h"
+#include "test_utils.h"
 
 TEST(DeckTest, AddCardToDeck) {
 	auto deck{ Deck() };
@@ -10,4 +12,14 @@ TEST(DeckTest, AddCardToDeck) {
 TEST(DeckTest, StarterDeckHasCorrectSize) {
 	auto deck{ buildStarterDeck() };
 	EXPECT_EQ(deck.size(), 8);
+}
+
+TEST(DeckTest, defendBlocksCorrectAmount) {
+	CardDef defendDef{ CARD_LIBRARY.at("Defend") };
+	Card defend{ buildCard(defendDef) };
+	BattleState battle = TestUtils::initBattleEmpty();
+
+	EXPECT_EQ(battle.getPlayer().getBlock(), 0);
+	defend.execute(battle);
+	EXPECT_EQ(battle.getPlayer().getBlock(), defendDef.effects.at(CardDef::Effect::BLOCK));
 }

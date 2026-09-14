@@ -5,6 +5,7 @@
 #include "card/card_library.h"
 
 namespace TestUtils {
+	BattleState initBattleEmpty();
 	BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw);
 	void addStrikes(Deck& deck, const int nCardsToAdd);
 }
