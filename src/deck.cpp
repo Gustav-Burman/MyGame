@@ -19,12 +19,12 @@ Card Deck::pop()
 // Non-member functions
 Deck buildStarterDeck()
 {
-	libMap lib = CardLibrary::getInstance()->getLib();
+	const libMap& lib = CARD_LIBRARY;
 	Deck deck{};
 	for (int i = 0; i < 4; i++)
 	{
-		Card strike{ lib["Strike"] };
-		Card defend{ lib["Defend"] };
+		Card strike{ lib.at("Strike") };
+		Card defend{ lib.at("Defend") };
 		deck.addCard(std::move(strike));
 		deck.addCard(std::move(defend));
 	}

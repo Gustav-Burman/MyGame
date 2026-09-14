@@ -4,17 +4,17 @@
 #include "monster/goblin.h"
 #include "monster/monster_library.h"
 
-libMap CARD_LIBRARY = CardLibrary::getInstance()->getLib();
+//libMap CARD_LIBRARY = CardLibrary::getInstance()->getLib();
 
 TEST(battleTest, cardLibrary)
 {
-	EXPECT_EQ(CARD_LIBRARY["Strike"].name, "Strike");
-	EXPECT_EQ(CARD_LIBRARY["Defend"].name, "Defend");
+	EXPECT_EQ(CARD_LIBRARY.at("Strike").name, "Strike");
+	EXPECT_EQ(CARD_LIBRARY.at("Defend").name, "Defend");
 }
 
 TEST(battleTest, MonsterTakingDamageOnDamageEffect)
 {
-	Card strike{ buildCard(CARD_LIBRARY["Strike"]) };
+	Card strike{ buildCard(CARD_LIBRARY.at("Strike")) };
 
 	// Init deck
 	Deck deck{};

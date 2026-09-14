@@ -4,28 +4,12 @@
 #include <unordered_map>
 #include "card.h"
 
-typedef std::unordered_map<std::string, CardDef> libMap;
-typedef std::unordered_map<CardDef::Effect, int, EnumHash> effectMap;
+// Typedef
+using libMap = std::unordered_map<std::string, CardDef>;
+using effectMap = std::unordered_map<CardDef::Effect, int, EnumHash>;
 
-class CardLibrary {
-public:
-	static CardLibrary* getInstance();
-
-	CardLibrary(CardLibrary&) = delete;
-	CardLibrary& operator=(const CardLibrary&) = delete;
-	CardLibrary(CardLibrary&&) = delete;
-	CardLibrary& operator=(const CardLibrary&&) = delete;
-
-	libMap getLib() { return m_library; }
-
-private:
-	CardLibrary(libMap library)
-		: m_library {library}
-	{};
-
-	libMap m_library;
-	static CardLibrary* instance;
-};
+// Global variables
+extern const libMap CARD_LIBRARY;
 
 // Non-member functions
 libMap buildCardLibrary();

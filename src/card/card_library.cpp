@@ -1,15 +1,6 @@
 #include "card_library.h"
 
-CardLibrary* CardLibrary::instance = nullptr;
-
-CardLibrary* CardLibrary::getInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new CardLibrary( buildCardLibrary() );
-	}
-	return instance;
-}
+extern const libMap CARD_LIBRARY = buildCardLibrary();
 
 libMap buildCardLibrary()
 {

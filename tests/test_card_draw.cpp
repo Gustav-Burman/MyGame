@@ -1,7 +1,4 @@
 #include <gtest/gtest.h>
-//#include "battle_state.h"
-//#include "deck.h"
-//#include "constants.h"
 #include "test_utils.cpp"
 
 TEST(CardDrawTest, InitDrawPile)
