@@ -3,6 +3,12 @@
 #include "card/card_library.h"
 #include "test_utils.h"
 
+TEST(battleTest, cardLibrary)
+{
+	EXPECT_EQ(CARD_LIBRARY.at("Strike").name, "Strike");
+	EXPECT_EQ(CARD_LIBRARY.at("Defend").name, "Defend");
+}
+
 TEST(DeckTest, AddCardToDeck) {
 	auto deck{ Deck() };
 	deck.addCard(Card{ "Name", CardDef::ATTACK, 2 });

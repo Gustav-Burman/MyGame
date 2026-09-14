@@ -5,12 +5,6 @@
 #include "card/card.h"
 #include "monster/monster_library.h"
 
-TEST(battleTest, cardLibrary)
-{
-	EXPECT_EQ(CARD_LIBRARY.at("Strike").name, "Strike");
-	EXPECT_EQ(CARD_LIBRARY.at("Defend").name, "Defend");
-}
-
 TEST(battleTest, MonsterTakingDamageOnDamageEffect)
 {
 	CardDef strikeDef = CARD_LIBRARY.at("Strike");
