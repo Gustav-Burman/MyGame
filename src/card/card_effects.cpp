@@ -6,5 +6,5 @@ void DamageEffect::execute(BattleState& battle) {
 }
 
 void BlockEffect::execute(BattleState& battle) {
-	battle.getPlayer().addBlock(m_amount);
+	battle.blockPlayer(m_amount);
 }

@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
-#include "deck.h"
-#include "player.h"
-#include "monster/monster.h"
-#include "constants.h"
+#include "../deck.h"
+#include "../player.h"
+#include "../monster/monster.h"
+#include "../constants.h"
+#include "game_state.h"
 
 class BattleState {
 public:
@@ -15,6 +16,7 @@ public:
 		: m_drawPile{ std::move(deck) }
 	{
 	}
+
 	void init();
 	void draw(int nCards);
 	void discardHand();
@@ -23,15 +25,12 @@ public:
 	int getDiscardPileSize() const { return m_discardPile.size(); }
 
 	void addMonster(Monster&& monster);
-
 	Monster& getMonster() { return m_monster; }
-	Player& getPlayer()   { return m_player; }
 
-	// Temp functions for debugging
-	void addPlayer(Player player) { m_player = player; }
+	void damagePlayer(int amount);
+	void blockPlayer (int baseAmount);
 
 private:
-	Player m_player{ Player() };
 	Monster m_monster{};
 	
 	Deck m_drawPile{};

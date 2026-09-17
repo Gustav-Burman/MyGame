@@ -35,3 +35,15 @@ void BattleState::addMonster(Monster&& monster)
 {
 	m_monster = std::move(monster);
 }
+
+void BattleState::damagePlayer(int baseAmount)
+{
+	GameState* gameState = GameState::getInstance();
+	gameState->m_player.takeDamage(baseAmount);
+}
+
+void BattleState::blockPlayer(int baseAmount)
+{
+	GameState* gameState = GameState::getInstance();
+	gameState->m_player.addBlock(baseAmount);
+}

@@ -5,7 +5,6 @@ namespace TestUtils {
 	{
 		Deck deck{};
 		BattleState battle{ std::move(deck) };
-		battle.addPlayer(Player{});
 		return battle;
 	}
 
@@ -16,7 +15,6 @@ namespace TestUtils {
 		MonsterDef goblinDef = MONSTER_LIBRARY.at("Goblin");
 		Monster goblin{ buildMonster(goblinDef) };
 		battle.addMonster(std::move(goblin));
-		battle.addPlayer(player);
 		return battle;
 	}
 

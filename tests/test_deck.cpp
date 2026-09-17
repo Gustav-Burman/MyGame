@@ -21,11 +21,14 @@ TEST(DeckTest, StarterDeckHasCorrectSize) {
 }
 
 TEST(DeckTest, defendBlocksCorrectAmount) {
+	GameState* gameState = GameState::getInstance();
 	CardDef defendDef{ CARD_LIBRARY.at("Defend") };
 	Card defend{ buildCard(defendDef) };
 	BattleState battle = TestUtils::initBattleNoEnemy();
 
-	EXPECT_EQ(battle.getPlayer().getBlock(), 0);
+	EXPECT_EQ(gameState->getPlayer().getBlock(), 0);
 	defend.execute(battle);
-	EXPECT_EQ(battle.getPlayer().getBlock(), defendDef.effects.at(CardDef::Effect::BLOCK));
+	EXPECT_EQ(gameState->getPlayer().getBlock(), defendDef.effects.at(CardDef::Effect::BLOCK));
+
+	gameState->reset();
 }

@@ -4,5 +4,5 @@
 void AttackAction::execute(BattleState& battle)
 {
 	int amount = m_baseAmount;
-	battle.getPlayer().takeDamage(amount);
+	battle.damagePlayer(amount);
 }
