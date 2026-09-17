@@ -1,5 +1,5 @@
 #include "monster_actions.h"
-#include "battle_state.h"
+#include "game_state/battle_state.h"
 
 void AttackAction::execute(BattleState& battle)
 {

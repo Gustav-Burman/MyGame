@@ -1,5 +1,5 @@
 #pragma once
-#include "battle_state.h"
+#include "game_state/battle_state.h"
 #include "deck.h"
 #include "constants.h"
 #include "card/card_library.h"

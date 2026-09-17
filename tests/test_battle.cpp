@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "test_utils.h"
-#include "battle_state.h"
+#include "game_state/battle_state.h"
 #include "card/card_library.h"
 #include "card/card.h"
 #include "monster/monster_library.h"
