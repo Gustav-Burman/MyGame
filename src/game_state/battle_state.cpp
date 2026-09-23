@@ -2,6 +2,9 @@
 
 void BattleState::init()
 {
+	GameState* gameState = GameState::getInstance();
+	// Spawn monster
+	m_drawPile = buildDrawPile();
 	m_drawPile.shuffle();
 }
 
@@ -46,4 +49,15 @@ void BattleState::blockPlayer(int baseAmount)
 {
 	GameState* gameState = GameState::getInstance();
 	gameState->m_player.addBlock(baseAmount);
+}
+
+
+// Non-member functions
+Deck buildDrawPile()
+{
+	GameState* gameState = GameState::getInstance();
+	Deck drawPile{};
+	for (auto def : gameState->m_cardDefs)
+		drawPile.addCard(buildCard(def));
+	return drawPile;
 }

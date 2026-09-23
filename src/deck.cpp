@@ -17,16 +17,16 @@ Card Deck::pop()
 
 
 // Non-member functions
-Deck buildStarterDeck()
+std::vector<CardDef> buildStarterDeck()
 {
 	const libMap& lib = CARD_LIBRARY;
-	Deck deck{};
+	std::vector<CardDef> deck{};
 	for (int i = 0; i < 4; i++)
 	{
-		Card strike{ lib.at("Strike") };
-		Card defend{ lib.at("Defend") };
-		deck.addCard(std::move(strike));
-		deck.addCard(std::move(defend));
+		CardDef strike{ lib.at("Strike") };
+		CardDef defend{ lib.at("Defend") };
+		deck.emplace_back(std::move(strike));
+		deck.emplace_back(std::move(defend));
 	}
 	return deck;
 }

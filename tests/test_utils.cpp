@@ -20,8 +20,7 @@ namespace TestUtils {
 
 	BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw)
 	{
-		Deck deck{ buildStarterDeck() };
-		BattleState battle{ std::move(deck) };
+		BattleState battle{};
 		battle.init();
 		battle.draw(nCardsToDraw);
 		return battle;

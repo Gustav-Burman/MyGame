@@ -31,4 +31,4 @@ private:
 };
 
 // Non-member functions
-Deck buildStarterDeck();
+std::vector<CardDef> buildStarterDeck();

@@ -12,10 +12,13 @@ public:
 		PLAYER_PHASE,
 		ENEMY_PHASE
 	};
+	// Constructor for making testing simpler
 	BattleState(Deck deck)
 		: m_drawPile{ std::move(deck) }
 	{
 	}
+	BattleState()
+	{ }
 
 	void init();
 	void draw(int nCards);
@@ -40,3 +43,6 @@ private:
 	//TurnPhase m_phase;
 	//int m_turn;
 };
+
+// Non-member functions
+Deck buildDrawPile();
