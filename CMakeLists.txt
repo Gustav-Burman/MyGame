@@ -38,7 +38,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable (game 
 	"src/main.cpp"
 	"src/window_utils.cpp"
-	"src/card/card.h" "src/card/card.cpp" "src/monster/monster.h" "src/player.h" "src/game_state/battle_state.h" "src/constants.h" "src/game_state/battle_state.cpp" "src/deck.h" "src/deck.cpp" "src/card/card_effects.h" "src/card/card_effects.cpp" "src/monster/monster.cpp" "src/monster/goblin.h" "src/card/card_library.cpp" "src/utils.h")
+	"src/card/card.h" "src/deck.cpp" "src/game_state/battle_state.cpp" "src/game_state/game_state.cpp" "src/card/card_effects.h" "src/card/card_effects.cpp" "src/monster/monster.cpp" "src/card/card_library.cpp" "src/card/card_library.h" "src/utils.h" "src/card/card.cpp" "src/monster/goblin.h" "src/monster/monster_actions.cpp" "src/player.cpp" "src/monster/monster_library.cpp" "src/monster/monster_strategies.cpp" "src/game_state/battle_state.h")
 target_link_libraries(game PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)
 
 # Copy assets folder to build configuration

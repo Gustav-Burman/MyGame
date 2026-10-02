@@ -8,13 +8,13 @@ namespace TestUtils {
 		return battle;
 	}
 
-	BattleState initBattleGoblin()
+	BattleState initBattleWithMonster(std::string& monsterName)
 	{
 		Player player{};
 		BattleState battle{ std::move(Deck{}) };
-		MonsterDef goblinDef = MONSTER_LIBRARY.at("Goblin");
-		Monster goblin{ buildMonster(goblinDef) };
-		battle.addMonster(std::move(goblin));
+		MonsterDef monsterDef = MONSTER_LIBRARY.at(monsterName);
+		Monster monster{ buildMonster(monsterDef) };
+		battle.addMonster(std::move(monster));
 		return battle;
 	}
 

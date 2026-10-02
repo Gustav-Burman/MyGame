@@ -5,8 +5,8 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include "window_utils.h"
-#include "battle_state.h"
-#include "card.h"
+#include "game_state/battle_state.h"
+#include "card/card.h"
 #include "deck.h"
 
 int main(int argc, char* argv[]) {
@@ -30,11 +30,11 @@ int main(int argc, char* argv[]) {
 	SDL_Event event;
 
 	// Init deck
-	Deck deck{};
+	//Deck deck{};
 
 	// Init battle
-	BattleState battle{ deck };
-	battle.init();
+	//BattleState battle{ deck };
+	//battle.init();
 
 	// Main game loop
 	while (running) {

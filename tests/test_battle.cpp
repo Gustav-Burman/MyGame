@@ -11,28 +11,31 @@ TEST(battleTest, MonsterTakingDamageOnDamageEffect)
 	CardDef strikeDef = CARD_LIBRARY.at("Strike");
 	Card strike{ buildCard(strikeDef) };
 
-	BattleState battle = TestUtils::initBattleGoblin();
+	std::string monsterName{ "Goblin" };
+	BattleState battle = TestUtils::initBattleWithMonster(monsterName);
 
-	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at("Goblin").maxHealth);
+	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at(monsterName).maxHealth);
 	strike.execute(battle);
-	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at("Goblin").maxHealth - strikeDef.effects.at(CardDef::Effect::DAMAGE));
+	EXPECT_EQ(battle.getMonster().getHealth(), MONSTER_LIBRARY.at(monsterName).maxHealth - strikeDef.effects.at(CardDef::Effect::DAMAGE));
 }
 
 TEST(battleTest, PlayerTakingDamageOnGoblinAttack)
 {
-	BattleState battle    = TestUtils::initBattleGoblin();
+	std::string monsterName{ "Goblin" };
+	BattleState battle    = TestUtils::initBattleWithMonster(monsterName);
 	GameState*  gameState = GameState::getInstance();
 
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
 	battle.getMonster().execute(battle);
-	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth() - MONSTER_LIBRARY.at("Goblin").actions.at(0));
-
+	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth() - getActionValue(MONSTER_LIBRARY.at(monsterName)));
+	
 	gameState->reset();
 }
 
 TEST(battleTest, PlayerBlockingFullDamageFromMonster)
 {
-	BattleState battle = TestUtils::initBattleGoblin();
+	std::string monsterName{ "Goblin" };
+	BattleState battle = TestUtils::initBattleWithMonster(monsterName);
 	GameState* gameState = GameState::getInstance();
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
 
@@ -44,7 +47,7 @@ TEST(battleTest, PlayerBlockingFullDamageFromMonster)
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend * 3);
 
 	battle.getMonster().execute(battle);
-	int damageFromGoblin = MONSTER_LIBRARY.at("Goblin").actions.at(0);
+	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(),  blockFromDefend * 3 - damageFromGoblin);
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
@@ -54,7 +57,8 @@ TEST(battleTest, PlayerBlockingFullDamageFromMonster)
 
 TEST(battleTest, PlayerBlockingExactDamageFromMonster)
 {
-	BattleState battle = TestUtils::initBattleGoblin();
+	std::string monsterName{ "Goblin" };
+	BattleState battle = TestUtils::initBattleWithMonster(monsterName);
 	GameState* gameState = GameState::getInstance();
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
 
@@ -66,7 +70,7 @@ TEST(battleTest, PlayerBlockingExactDamageFromMonster)
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend * 2);
 
 	battle.getMonster().execute(battle);
-	int damageFromGoblin = MONSTER_LIBRARY.at("Goblin").actions.at(0);
+	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), 0);
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
@@ -76,7 +80,8 @@ TEST(battleTest, PlayerBlockingExactDamageFromMonster)
 
 TEST(battleTest, PlayerBlockingPartOfDamageFromMonster)
 {
-	BattleState battle = TestUtils::initBattleGoblin();
+	std::string monsterName{ "Goblin" };
+	BattleState battle = TestUtils::initBattleWithMonster(monsterName);
 	GameState* gameState = GameState::getInstance();
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
 
@@ -87,7 +92,7 @@ TEST(battleTest, PlayerBlockingPartOfDamageFromMonster)
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend);
 
 	battle.getMonster().execute(battle);
-	int damageFromGoblin = MONSTER_LIBRARY.at("Goblin").actions.at(0);
+	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), 0);
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth() - (damageFromGoblin - blockFromDefend));

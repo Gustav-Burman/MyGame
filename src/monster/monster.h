@@ -3,10 +3,16 @@
 #include <memory>
 #include <vector>
 #include <unordered_map>
+#include <variant>
 #include "monster_actions.h"
 #include "monster_strategies.h"
 #include "../utils.h"
 
+// TypeDefs
+//using actionValue = std::variant<int, std::vector<int>>;
+using monsterActionMap = std::unordered_map<int, vecInt>;
+
+// Classes
 struct MonsterDef {
 public:
 	enum Type {
@@ -26,8 +32,8 @@ public:
 	Type										type		{ NONE };
 	int											maxHealth   { 0 };
 
-	std::unordered_map<int, int> actions{};
-	Strategy                     strategy{};
+	monsterActionMap actions{};
+	Strategy         strategy{};
 };
 
 class Monster {
@@ -49,7 +55,7 @@ public:
 
 	void takeDamage (int amount);
 
-	void addStrategy(std::unique_ptr<MonsterStrategy> strategy) { m_strategy = std::move(strategy); }
+	void setStrategy(std::unique_ptr<MonsterStrategy> strategy) { m_strategy = std::move(strategy); }
 	void execute	(BattleState& battle);
 
 private:
@@ -57,10 +63,11 @@ private:
 	MonsterDef::Type					m_type		{ MonsterDef::NONE };
 	int									m_maxHealth	{ 0 };
 	int								    m_health	{ 0 };
-
 	std::unique_ptr<MonsterStrategy>    m_strategy  {};
 	int									m_actionId  { 0 };
 };
 
 // Non-member functions
 Monster buildMonster(MonsterDef def);
+
+int getActionValue(MonsterDef def);

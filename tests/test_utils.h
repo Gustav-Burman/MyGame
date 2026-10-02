@@ -1,4 +1,5 @@
 #pragma once
+#include <string_view>
 #include "game_state/battle_state.h"
 #include "deck.h"
 #include "constants.h"
@@ -7,7 +8,7 @@
 
 namespace TestUtils {
 	BattleState initBattleNoEnemy();
-	BattleState initBattleGoblin();
+	BattleState initBattleWithMonster(std::string& monster);
 	BattleState initBattleWithStarterDeckAndDrawCards(const int nCardsToDraw);
 	void addStrikes(Deck& deck, const int nCardsToAdd);
 }

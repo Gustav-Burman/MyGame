@@ -1,6 +1,10 @@
 #pragma once
 #include <functional>
 
+// TypeDefs
+using vecInt = std::vector<int>;
+
+// Structs
 struct EnumHash {
 	template <typename T>
 	std::size_t operator()(T e) const {

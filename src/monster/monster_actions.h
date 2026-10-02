@@ -1,4 +1,5 @@
 #pragma once
+#include "../utils.h"
 
 // Forward declare BattleState to avoid circular dependency
 class BattleState;
@@ -13,7 +14,7 @@ class AttackAction : public MonsterAction
 {
 public:
 	explicit AttackAction(int baseAmount)
-		: m_baseAmount{ baseAmount } {}
+		: m_baseAmount{ baseAmount } { }
 	void execute(BattleState& battle) override;
 
 private:
