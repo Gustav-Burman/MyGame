@@ -12,7 +12,8 @@ monsterMap buildMonsterLibrary()
 		.name = "Goblin",
 		.type = MonsterDef::Type::BASIC,
 		.maxHealth = 30,
-		.actions = goblinActions
+		.actions = goblinActions,
+		.strategy = MonsterDef::Strategy::SingleAction
 	};
 
 	monsterMap monsterLibrary;

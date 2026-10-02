@@ -24,6 +24,6 @@ private:
 
 	static GameState* instance;
 	
-	Player m_player             { Player() };
+	Player m_player                 { Player() };
 	std::vector<CardDef> m_cardDefs { buildStarterDeck() };
 };

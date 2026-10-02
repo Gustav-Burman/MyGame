@@ -7,9 +7,7 @@ void Monster::takeDamage(int amount)
 
 void Monster::execute(BattleState& battle)
 {
-	m_actions[m_actionId]->execute(battle);
-	if (++m_actionId >= m_actions.size())
-		m_actionId = 0;
+	m_strategy->performAction(battle);
 }
 
 
@@ -17,9 +15,14 @@ void Monster::execute(BattleState& battle)
 Monster buildMonster(MonsterDef def)
 {
 	Monster monster{ def };
-	for (const auto& [action, value] : def.actions)
+
+	switch (def.strategy)
 	{
-		monster.addAction(std::make_unique<AttackAction>(value));
+	case MonsterDef::SingleAction:
+		std::unique_ptr<AttackAction> ptr = std::make_unique<AttackAction>(def.actions.at(0));
+		std::unique_ptr<SingleActionStrategy> strat = std::make_unique<SingleActionStrategy>(std::move(ptr));
+		monster.addStrategy(std::move(strat));
 	}
+
 	return monster;
 }

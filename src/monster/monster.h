@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include "monster_actions.h"
+#include "monster_strategies.h"
 #include "../utils.h"
 
 struct MonsterDef {
@@ -17,12 +18,16 @@ public:
 	enum Action {
 		ATTACK
 	};
+	enum Strategy {
+		SingleAction
+	};
 
 	std::string									name		{ "" };
 	Type										type		{ NONE };
 	int											maxHealth   { 0 };
 
 	std::unordered_map<int, int> actions{};
+	Strategy                     strategy{};
 };
 
 class Monster {
@@ -44,17 +49,17 @@ public:
 
 	void takeDamage (int amount);
 
-	void addAction  (std::unique_ptr<MonsterAction> action) { m_actions.push_back(std::move(action)); }
+	void addStrategy(std::unique_ptr<MonsterStrategy> strategy) { m_strategy = std::move(strategy); }
 	void execute	(BattleState& battle);
 
 private:
-	std::string									m_name		{ "" };
-	MonsterDef::Type							m_type		{ MonsterDef::NONE };
-	int											m_maxHealth	{ 0 };
-	int										    m_health	{ 0 };
+	std::string						    m_name		{ "" };
+	MonsterDef::Type					m_type		{ MonsterDef::NONE };
+	int									m_maxHealth	{ 0 };
+	int								    m_health	{ 0 };
 
-	std::vector<std::unique_ptr<MonsterAction>> m_actions	{};
-	int											m_actionId  { 0 };
+	std::unique_ptr<MonsterStrategy>    m_strategy  {};
+	int									m_actionId  { 0 };
 };
 
 // Non-member functions
