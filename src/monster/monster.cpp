@@ -5,10 +5,20 @@ void Monster::takeDamage(int amount)
 	m_health -= amount;
 }
 
+void Monster::addBlock(int amount)
+{
+	m_block += amount;
+}
+
 void Monster::takeTurn(BattleState& battle)
 {
-	MonsterAction* action = m_strategy->selectAction();
-	action->execute(battle, *this);
+	// Having a dumb pointer for action is safe since MonsterAction lives until Monster is deleted
+	if (m_strategy)
+	{
+		MonsterAction* action = m_strategy->selectAction();
+		if (action) 
+			action->execute(battle, *this);
+	}
 }
 
 
@@ -21,11 +31,7 @@ Monster buildMonster(MonsterDef def)
 	{
 	case MonsterDef::SingleAction:
 	{
-		const int value = getActionValue(def);
-		std::unique_ptr<AttackAction> attackAction = std::make_unique<AttackAction>(value);
-		std::unique_ptr<SingleActionStrategy> strategy = std::make_unique<SingleActionStrategy>(std::move(attackAction));
-		monster.setStrategy(std::move(strategy));
-		break;
+		monster.setStrategy(std::move(buildSingleActionStrategy(def)));
 	}
 
 	default:
@@ -36,7 +42,7 @@ Monster buildMonster(MonsterDef def)
 }
 
 // Gets the value for the first action in the MonsterDef
-int getActionValue(MonsterDef def)
-{
-	return def.actions.at(0)[0];
-}
+//int getActionValue(MonsterDef def)
+//{
+//	return def.actions.at(0)[0];
+//}

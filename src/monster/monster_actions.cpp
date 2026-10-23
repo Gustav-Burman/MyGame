@@ -10,5 +10,5 @@ void AttackAction::execute(BattleState& battle, Monster& self)
 void BlockAction::execute(BattleState& battle, Monster& self)
 {
 	int amount = m_baseAmount;
-	
+	self.addBlock(amount);
 }
