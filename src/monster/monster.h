@@ -56,15 +56,19 @@ public:
 	void takeDamage (int amount);
 
 	void setStrategy(std::unique_ptr<MonsterStrategy> strategy) { m_strategy = std::move(strategy); }
-	void execute	(BattleState& battle);
+	void takeTurn	(BattleState& battle);
 
 private:
+	// Monster parameters
 	std::string						    m_name		{ "" };
 	MonsterDef::Type					m_type		{ MonsterDef::NONE };
 	int									m_maxHealth	{ 0 };
-	int								    m_health	{ 0 };
 	std::unique_ptr<MonsterStrategy>    m_strategy  {};
 	int									m_actionId  { 0 };
+
+	// Combat stats
+	int m_health { 0 };
+	int m_block  { 0 };
 };
 
 // Non-member functions

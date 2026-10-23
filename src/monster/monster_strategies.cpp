@@ -1,7 +1,7 @@
 #include "monster_strategies.h"
 #include "../game_state/battle_state.h"
 
-void SingleActionStrategy::performAction(BattleState& battle)
+MonsterAction* SingleActionStrategy::selectAction()
 {
-	m_action->execute(battle);
+	return m_action.get();
 }

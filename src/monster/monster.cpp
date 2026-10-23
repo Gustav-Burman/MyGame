@@ -5,9 +5,10 @@ void Monster::takeDamage(int amount)
 	m_health -= amount;
 }
 
-void Monster::execute(BattleState& battle)
+void Monster::takeTurn(BattleState& battle)
 {
-	m_strategy->performAction(battle);
+	MonsterAction* action = m_strategy->selectAction();
+	action->execute(battle, *this);
 }
 
 

@@ -26,7 +26,7 @@ TEST(battleTest, PlayerTakingDamageOnGoblinAttack)
 	GameState*  gameState = GameState::getInstance();
 
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth());
-	battle.getMonster().execute(battle);
+	battle.getMonster().takeTurn(battle);
 	EXPECT_EQ(gameState->getPlayer().getHealth(), gameState->getPlayer().getMaxHealth() - getActionValue(MONSTER_LIBRARY.at(monsterName)));
 	
 	gameState->reset();
@@ -46,7 +46,7 @@ TEST(battleTest, PlayerBlockingFullDamageFromMonster)
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend * 3);
 
-	battle.getMonster().execute(battle);
+	battle.getMonster().takeTurn(battle);
 	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(),  blockFromDefend * 3 - damageFromGoblin);
@@ -69,7 +69,7 @@ TEST(battleTest, PlayerBlockingExactDamageFromMonster)
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend * 2);
 
-	battle.getMonster().execute(battle);
+	battle.getMonster().takeTurn(battle);
 	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), 0);
@@ -91,7 +91,7 @@ TEST(battleTest, PlayerBlockingPartOfDamageFromMonster)
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), blockFromDefend);
 
-	battle.getMonster().execute(battle);
+	battle.getMonster().takeTurn(battle);
 	int damageFromGoblin = getActionValue(MONSTER_LIBRARY.at(monsterName));
 
 	EXPECT_EQ(gameState->getPlayer().getBlock(), 0);
